@@ -1,0 +1,38 @@
+import org.junit.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import static io.restassured.RestAssured.given;
+
+import java.util.List;
+
+import io.restassured.specification.Argument;
+import io.restassured.specification.RequestSpecification;
+
+public class sample {
+	@Test
+	public void authenticate() {
+		
+		RestAssured.baseURI = "https://swaper.com/rest/public";
+		RestAssured.basePath = "/login";
+		RequestSpecification request =  given().auth().basic("testuser@qa.com", "Parole123");
+		Response response = request.get();
+		System.out.println(response.asString());
+//		RestAssured.basePath = "/profile/account-entries";
+		RestAssured.basePath.replaceFirst(null, "/profile/account-entries");
+		RestAssured.baseURI = "https://swaper.com/rest/public";
+
+		Response new_response = given().when().get("/profile/account-entries").then().body(withArgs("openingBalance"), equalTo("0.00"));
+		System.out.println(new_response.asString());
+		
+//		String openingBalance;
+//		Response new2_response = given().when().post("/profile/account-entries").then().Asertbody("openingBalance", equals(0.00));
+//		System.out.println(new2_response.asString());
+	}
+
+	private List<Argument> containsString(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

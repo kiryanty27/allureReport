@@ -1,0 +1,42 @@
+import org.junit.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import static io.restassured.RestAssured.given;
+
+//import java.util.List;
+
+//import io.restassured.specification.Argument;
+import io.restassured.specification.RequestSpecification;
+
+@SuppressWarnings("unused")
+public class sample {
+	@Test
+	public void authenticate() {
+		
+		RestAssured.baseURI = "https://swaper.com/rest/public";
+		RequestSpecification httpRequest = RestAssured.given();
+//		RestAssured.basePath = "/login";
+//		RequestSpecification request =  	((RequestSpecification) 
+		RestAssured.given().get("/login")).auth().basic("testuser@qa.com", "Parole123");
+//		System.out.println(request);
+		
+		Response response = httpRequest.get("/profile/account-entries");
+		JsonPath jsonPathEvaluator = response.jsonPath();
+		String balance = jsonPathEvaluator.get("openingBalance");
+		System.out.println("Balance received from Response " + balance);
+//		System.out.println(response.asString());
+//		RestAssured.basePath = "/profile/account-entries";
+//		RestAssured.basePath.replaceFirst(null, "/profile/account-entries");
+//		RestAssured.baseURI = "https://swaper.com/rest/public";
+
+//		Response new_response = given().when().get("/profile/account-entries").then().body(withArgs("openingBalance"), equalTo("0.00"));
+//		System.out.println(new_response.asString());
+		
+//		String openingBalance;
+//		Response new2_response = given().when().post("/profile/account-entries").then().Asertbody("openingBalance", equals(0.00));
+//		System.out.println(new2_response.asString());
+	}
+
+}

@@ -1,0 +1,20 @@
+//import cucumber.api.java.en.given;
+import cucumber.api.cli.*;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
+
+import static io.restassured.RestAssured.given;
+import io.restassured.specification.RequestSpecification;
+
+public class steps {
+	
+//	RestAssured. = "https://swaper.com/rest/public";
+	
+//	@Given("User made authentication") {
+//		RestAssured.baseURI = "https://swaper.com";
+//		RestAssured.basePath = "/rest/public/login";
+//		RequestSpecification request =  RestAssured.given().auth().basic("testuser@qa.com", "Parole123");	
+//		}
+}

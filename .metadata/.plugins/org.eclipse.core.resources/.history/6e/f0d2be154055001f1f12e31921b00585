@@ -1,0 +1,71 @@
+import org.junit.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.http.Method;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
+
+import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertArrayEquals;
+
+import java.io.FileWriter;
+
+//import java.util.List;
+
+//import io.restassured.specification.Argument;
+import io.restassured.specification.RequestSpecification;
+import junit.framework.Assert;
+
+@SuppressWarnings("unused")
+public class sample {
+	//User login
+	@Test
+	public void authenticate() {
+		RestAssured
+			.given()
+				.auth().basic("testuser@qa.com", "Parole123")
+					.contentType(ContentType.JSON)
+						.baseUri("https://swaper.com")
+						.when()
+						.get("/en/login")
+						.then()
+						.assertThat()
+						.statusCode(200);
+		
+ 		RestAssured.baseURI = "https://swaper.com";
+	
+		String requestBody = "";
+ 		Response response = given()
+ 				.contentType(ContentType.JSON)
+ 				.body(requestBody)
+ 				.when()				
+ 				.post("/en/investments/open-investments")
+ 				.then()
+ 				.extract()
+ 				.response();
+ 		RequestSpecification httprequest = given();
+ 		
+ 		Response response2 = httprequest.request(Method.POST, "/rest/public/profile/account-entries");
+ 		ResponseBody<?> body = response2.getBody();
+ 		System.out.println("Response2 Body is: " + body.asString());
+// 		given()
+// 				.contentType(ContentType.TEXT)
+// 				.get("/en/investments/open-investments");
+// 		JsonPath jsonPath = new JsonPath(response2.asString());
+// 		
+// 		String title = jsonPath.getString("openingBalance");
+// 		System.out.println(title);
+
+ 		String jsonAsString = response.asString();
+ 		System.out.println(jsonAsString);
+
+//		String balance = jsonAsString..get("openingBalance");
+//		assert balance == "0.00";
+//		System.out.println("Balance received from Response " + balance);
+//		System.out.println(response.asString());
+
+	}
+
+}

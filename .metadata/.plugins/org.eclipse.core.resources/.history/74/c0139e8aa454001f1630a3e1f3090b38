@@ -1,0 +1,46 @@
+import org.junit.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import static io.restassured.RestAssured.given;
+
+import java.io.FileWriter;
+
+//import java.util.List;
+
+//import io.restassured.specification.Argument;
+import io.restassured.specification.RequestSpecification;
+
+@SuppressWarnings("unused")
+public class sample {
+	//User login
+	@Test
+	public void authenticate() {
+		RestAssured
+			.given()
+				.auth().basic("testuser@qa.com", "Parole123")
+					.contentType(ContentType.JSON)
+						.baseUri("https://swaper.com")
+						.when()
+						.get("/en/login")
+						.then()
+						.assertThat()
+						.statusCode(200);
+		
+// 		RestAssured.baseURI = "https://swaper.com";
+// 		RequestSpecification httpRequest = RestAssured.given();		
+		
+// 		Response response = httpRequest.get("/rest/public/profile/account-entries");
+// 		String responseBody = response.getBody().asString();
+// 		System.out.println(responseBody);
+//		JsonPath jsonPathEvaluator = response.jsonPath();
+//		String balance = jsonPathEvaluator.get("openingBalance");
+//		assert balance == "0.00";
+//		System.out.println("Balance received from Response " + balance);
+//		System.out.println(response.asString());
+
+	}
+
+}
